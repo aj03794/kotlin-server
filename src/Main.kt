@@ -12,27 +12,36 @@ import io.ktor.routing.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
-data class Author(val name: String, val website: String)
-data class ToDo(var id: Int, val name: String, val description: String, val completed: Boolean)
+import other.baz
+
+import domain.entities.Author
+import domain.entities.Todo
 
 fun main(args: Array<String>) {
-    
-   embeddedServer(Netty, 9000) {
-       install(ContentNegotiation) {
-           gson {
-               setPrettyPrinting()
-           }
-       }
-       routing() {
-           route("/todo") {
-               post {
 
-                   call.respond("Added")
-               }
-           }
-           get("/author"){
-               call.respond(Author("Baeldung","baeldung.com"))
-           }
-       }
-   }.start(wait = true)
+    val myAuthor = Author("some", "author")
+    val myTodo = Todo(1, "some name", "some description", false)
+
+    println(myAuthor)
+    println(myTodo)
+
+    // baz()
+
+    // embeddedServer(Netty, 9000) {
+    //     install(ContentNegotiation) {
+    //         gson {
+    //             setPrettyPrinting()
+    //         }
+    //     }
+    //     routing() {
+    //         route("/todo") {
+    //             post {
+    //                 call.respond("Added")
+    //             }
+    //         }
+    //         get("/author"){
+    //             call.respond(Author("Baeldung","baeldung.com"))
+    //         }
+    //     }
+    // }.start(wait = true)
 }
