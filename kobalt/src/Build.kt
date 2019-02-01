@@ -16,15 +16,15 @@ val p = project {
     artifactId = name
     version = "0.1"
 
+    sourceDirectories {
+        path("src")
+    }
+
     dependencies {
         compile("org.jetbrains.kotlin:kotlin-stdlib:1.3.11")
         compile("io.ktor:ktor-server-netty:0.9.2")
         compile("io.ktor:ktor-gson:0.9.2")
         compile("ch.qos.logback:logback-classic:1.2.1")
-    }
-
-    dependenciesTest {
-        compile("org.testng:testng:6.11")
     }
 
     assemble {
