@@ -6,12 +6,17 @@ import domain.gateways.TodoGatewayInterface
 
 class TodoController(
     val todoGateway: TodoGatewayInterface,
-    val validateTodo: () -> Unit
+    val validateTodo: (todo: Todo) -> Boolean
 ) {
     val addTodoInteractor = AddTodoInteractor(todoGateway)
     fun addTodo(todo: Todo): String {
-        validateTodo()
-        val result = addTodoInteractor.execute()
-        return result
+        try {
+            validateTodo(todo)
+            val result = addTodoInteractor.execute()
+            return result
+        }
+        catch(err: IllegalArgumentException) {
+            return err!!.message.toString()
+        }
     }
 }
