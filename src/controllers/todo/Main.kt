@@ -12,7 +12,8 @@ class TodoController(
     fun addTodo(todo: Todo): String {
         try {
             validateTodo(todo)
-            val result = addTodoInteractor.execute()
+            print(todo)
+            val result = addTodoInteractor.execute(todo)
             return result
         }
         catch(err: IllegalArgumentException) {
