@@ -1,2 +1,4 @@
 kobaltBuild/
 .kobalt/
+.idea/
+kotlin-server.iml
