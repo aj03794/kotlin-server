@@ -21,14 +21,14 @@ class TodoController(
             return err!!.message.toString()
         }
     }
-    fun deleteTodo(id: String): String {
+    fun deleteTodo(id: String): Todo {
         var idAsInt: Int
         try {
             idAsInt = id.toInt()
+            return DeleteTodoInteractor.execute(int)
         }
         catch(err: Throwable) {
             return err!!.message.toString()
         }
-        return "Deleted $idAsInt"
     }
 }
