@@ -1,8 +1,10 @@
 package domain.gateways
 
+import domain.entities.Todo
+
 interface TodoGatewayInterface {
     fun delete() {}
-    fun add(): String
+    fun add(todo: Todo): String
     fun get() {}
     fun getAll() {}
 }
