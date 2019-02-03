@@ -14,6 +14,17 @@
 
 - Job: Receive requests and call controller
 
+#### Domain
+
+###### Entities
+
+- Application independent business rules
+    * In this case data classes for what `Author` and `Todo` look like
+
+###### Gateways
+
+- Interface to describe the operations that can be performed on the entities
+
 
 #### Resources
 
