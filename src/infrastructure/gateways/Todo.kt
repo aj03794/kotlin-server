@@ -13,7 +13,9 @@ class TodoGatewayImpl(val todos: ArrayList<Todo> = ArrayList<Todo>()): TodoGatew
         this.todos.add(todo)
         return "todo added"
     }
-    override fun get() { println("adding todo to list") }
+    override fun get(id: Int): Todo {
+        return this.todos.find{ it.id === id }!!
+    }
     override fun getAll(): ArrayList<Todo> {
         return this.todos
     }
