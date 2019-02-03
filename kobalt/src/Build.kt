@@ -8,6 +8,7 @@ val bs = buildScript {
         "https://dl.bintray.com/cbeust/maven/",
         "https://dl.bintray.com/kotlin/ktor"
     )
+    // kobaltCompilerVersion = "1.2.7"
 }
 
 val p = project {
@@ -21,7 +22,7 @@ val p = project {
     }
 
     dependencies {
-        compile("org.jetbrains.kotlin:kotlin-stdlib:1.3.11")
+        compile("org.jetbrains.kotlin:kotlin-stdlib:1.3.0")
         compile("io.ktor:ktor-server-netty:0.9.2")
         compile("io.ktor:ktor-gson:0.9.2")
         compile("ch.qos.logback:logback-classic:1.2.1")
