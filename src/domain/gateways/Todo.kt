@@ -3,8 +3,8 @@ package domain.gateways
 import domain.entities.Todo
 
 interface TodoGatewayInterface {
-    fun delete() {}
+    fun delete(id: Int): Todo
     fun add(todo: Todo): String
-    fun get() {}
-    fun getAll() {}
+    fun get()
+    fun getAll(): ArrayList<Todo>
 }
