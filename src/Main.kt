@@ -36,8 +36,14 @@ fun main(args: Array<String>) {
                 val todo = call.receive<Todo>()
                 call.respond(todoController.addTodo(todo))
             }
-            delete("/todo/{id}") {
-                call.respond(todoController.deleteTodo(call.parameters["id"]!!))
+            delete("/todo/id/{id}") {
+                call.respond(todoController.deleteTodo(call.parameters["id"]!!.toInt()))
+            }
+            get("/todo/id/{id}") {
+                call.respond(todoController.getTodo(call.parameters["id"]!!.toInt()))
+            }
+            get("/todos") {
+                call.respond(todoController.getAllTodos())
             }
         }
     }.start(wait = true)

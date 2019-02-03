@@ -4,6 +4,7 @@ import domain.entities.Todo
 import usecases.interactors.AddTodoInteractor
 import usecases.interactors.DeleteTodoInteractor
 import usecases.interactors.GetAllTodosInteractor
+import usecases.interactors.GetTodoInteractor
 import domain.gateways.TodoGatewayInterface
 
 class TodoController(
@@ -13,6 +14,7 @@ class TodoController(
     val addTodoInteractor = AddTodoInteractor(todoGateway)
     val deleteTodoInteractor = DeleteTodoInteractor(todoGateway)
     val getAllTodosInteractor = GetAllTodosInteractor(todoGateway)
+    val getTodoInteractor = GetTodoInteractor(todoGateway)
     fun addTodo(todo: Todo): String {
         try {
             validateTodo(todo)
@@ -37,5 +39,23 @@ class TodoController(
         catch(err: Throwable) {
             return err!!.message.toString()
         }
+    }
+    fun getTodo(id: Int): Any {
+        var idAsInt: Int
+        val todos = getAllTodosInteractor.execute()
+        try {
+            idAsInt = id.toInt()
+            val todo = todos.find{ it.id === id }
+            if (todo !is Todo) {
+                return "Todo with id: $id does not exist"
+            }
+            return getTodoInteractor.execute(idAsInt)
+        }
+        catch(err: Throwable) {
+            return err!!.message.toString()
+        }
+    }
+    fun getAllTodos(): ArrayList<Todo> {
+        return getAllTodosInteractor.execute()
     }
 }
