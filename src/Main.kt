@@ -1,6 +1,5 @@
 package com.example
 
-// import io.ktor.application.*
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.ContentNegotiation
@@ -14,7 +13,6 @@ import io.ktor.response.respondText
 import io.ktor.routing.*
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-
 
 import controllers.Controllers
 import domain.entities.Todo
@@ -41,22 +39,3 @@ fun main(args: Array<String>) {
         }
     }.start(wait = true)
 }
-
-
-
-
-
-
-        // routing {
-        //     post("/todo") {
-        //         data class Request()
-        //         println("${call::class.simpleName}")
-        //         val obj: T = call.receive<T>()
-        //         // val response = todoController()
-        //         // call.respond(response)
-        //         call.respond("hello world")
-        //     }
-        //     get("/author") {
-        //         call.respond("hello from /author")
-        //     }
-        // }
