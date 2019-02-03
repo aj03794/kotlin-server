@@ -1,15 +1,13 @@
 package controllers.todo
 
 import domain.entities.Todo
-import usecases.interactors.AddTodoInteractor
-import usecases.interactors.DeleteTodoInteractor
-import usecases.interactors.GetAllTodosInteractor
-import usecases.interactors.GetTodoInteractor
+import usecases.interactors.*
 import domain.gateways.TodoGatewayInterface
 
 class TodoController(
     val todoGateway: TodoGatewayInterface,
-    val validateTodo: (todo: Todo) -> Boolean
+    val validateTodo: (todo: Todo) -> Boolean,
+    val todoExists: (todos: ArrayList<Todo>, id: Int) -> Boolean
 ) {
     val addTodoInteractor = AddTodoInteractor(todoGateway)
     val deleteTodoInteractor = DeleteTodoInteractor(todoGateway)
@@ -26,36 +24,18 @@ class TodoController(
         }
     }
     fun deleteTodo(id: Int): Any {
-        var idAsInt: Int
-        val todos = getAllTodosInteractor.execute()
-        try {
-            idAsInt = id.toInt()
-            val todo = todos.find{ it.id === id }
-            if (todo !is Todo) {
-                return "Todo with id: $id does not exist"
-            }
-            return deleteTodoInteractor.execute(idAsInt)
-        }
-        catch(err: Throwable) {
-            return err!!.message.toString()
-        }
+        return if (!this.internalTodoExists(id)) "Todo with id: $id does not exist"
+        else deleteTodoInteractor.execute(id)
     }
     fun getTodo(id: Int): Any {
-        var idAsInt: Int
-        val todos = getAllTodosInteractor.execute()
-        try {
-            idAsInt = id.toInt()
-            val todo = todos.find{ it.id === id }
-            if (todo !is Todo) {
-                return "Todo with id: $id does not exist"
-            }
-            return getTodoInteractor.execute(idAsInt)
-        }
-        catch(err: Throwable) {
-            return err!!.message.toString()
-        }
+        return if (!this.internalTodoExists(id)) "Todo with id: $id does not exist"
+        else getTodoInteractor.execute(id)
     }
     fun getAllTodos(): ArrayList<Todo> {
         return getAllTodosInteractor.execute()
     }
+    private fun internalTodoExists(id: Int): Boolean {
+        return todoExists(getAllTodosInteractor.execute(), id)
+    }
 }
+
