@@ -1,7 +1,10 @@
 package domain.utils
 
-package domain.entities.Todo
+import domain.entities.Todo
 
-fun todoExists(val todos: ArrayList<Todo>) {
-    
+
+fun todoExists(todos: ArrayList<Todo>, id: Int): Boolean {
+    val todo = todos.find{ it.id === id }
+    if (todo !is Todo) return false
+    return true
 }
